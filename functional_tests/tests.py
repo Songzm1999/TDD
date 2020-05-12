@@ -2,8 +2,9 @@ from selenium import webdriver
 import unittest
 from selenium.webdriver.common.keys import Keys
 import time
+from django.test import LiveServerTestCase
  
-class NewVisitorTest(unittest.TestCase): #(1)
+class NewVisitorTest(LiveServerTestCase): #(1)
 	
 	# setUp和tearDown是在每次测试之前和之后运行的特殊方法。使用它们来启动和停止我们的浏览器 
 	# 注意它们有点像try / except，即使在测试期间出现错误，tearDown也会运行。
@@ -21,7 +22,7 @@ class NewVisitorTest(unittest.TestCase): #(1)
 	def test_can_start_a_list_and_retrive_it_later(self):
 		# Edith has heard about a cool new online to-do app. She goes 
 		# to check out its homepage
-		self.browser.get('http://localhost:8000')
+		self.browser.get(self.live_server_url)
 
 		# 使用self.assertIn代替断言。unittest提供了许多像这样的辅助功能来进行测试，
 		# 比如assertEqual，assertTrue，assertFalse等等。
@@ -73,7 +74,3 @@ class NewVisitorTest(unittest.TestCase): #(1)
 
 		#Satisfied ,she goes back to sleep
 		self.fail('Finish the test!')	#self.fail无论如何都会失败，产生错误信息。 我们用它作为完成测试的提醒。
-
-# main function model
-if __name__=='__main__':
-	unittest.main(warnings='ignore')
