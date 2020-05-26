@@ -87,7 +87,6 @@ class NewVisitorTest(LiveServerTestCase): #(1)
 
 		#Satisfied ,she goes back to sleep
 		# self.fail('Finish the test!')	#self.fail无论如何都会失败，产生错误信息。 我们用它作为完成测试的提醒。
-
 	
 	def test_multiple_users_can_start_lists_at_different_urls(self):
         # 乔伊新建一个待办事项清单
