@@ -3,10 +3,11 @@ from selenium.webdriver.common.keys import Keys
 import time
 from django.test import LiveServerTestCase
 from selenium.common.exceptions import WebDriverException
+from django.contrib.staticfiles.testing import StaticLiveServerTestCase
 
 MAX_WAIT = 10
  
-class NewVisitorTest(LiveServerTestCase): #(1)
+class NewVisitorTest(StaticLiveServerTestCase): #(1)
 	
 	# setUp和tearDown是在每次测试之前和之后运行的特殊方法。使用它们来启动和停止我们的浏览器 
 	# 注意它们有点像try / except，即使在测试期间出现错误，tearDown也会运行。
@@ -14,6 +15,7 @@ class NewVisitorTest(LiveServerTestCase): #(1)
 		self.browser = webdriver.Firefox()
 		
 	def tearDown(self):
+		self.browser.refresh()
 		self.browser.quit()
 
 	def wait_for_row_in_list_table(self,row_text):
