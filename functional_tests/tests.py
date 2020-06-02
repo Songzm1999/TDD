@@ -4,6 +4,7 @@ import time
 from django.test import LiveServerTestCase
 from selenium.common.exceptions import WebDriverException
 from django.contrib.staticfiles.testing import StaticLiveServerTestCase
+import os
 
 MAX_WAIT = 10
  
@@ -13,6 +14,9 @@ class NewVisitorTest(StaticLiveServerTestCase): #(1)
 	# 注意它们有点像try / except，即使在测试期间出现错误，tearDown也会运行。
 	def setUp(self):
 		self.browser = webdriver.Firefox()
+		staging_server = os.environ.get('STAGING_SERVER')
+		if staging_server:
+			self.live_server_url = 'http://'+staging_server
 		
 	def tearDown(self):
 		self.browser.refresh()
